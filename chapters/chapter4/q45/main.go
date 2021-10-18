@@ -1,9 +1,31 @@
 package q45
 
+type Counter struct {
+	bound int
+	count int
+}
+
+func NewCounter(N int) *Counter {
+	c := new(Counter)
+	c.bound = N
+	c.count = 0
+	return c
+}
+
+func (c *Counter) Calc(current, used int) {
+	if current > c.bound {
+		return
+	}
+	if used == 0b111 {
+		c.count++
+	}
+	for i, v := range []int{3, 5, 7} {
+		c.Calc(current*10+v, used|1<<i)
+	}
+}
+
 func Solution(N int) int {
-	// 0 から始めて、Nより大きくなったらやめる
-	// Nより大きくならない間は、下位1桁に7, 5, 3のいずれかを加える。
-	// 7, 5, 3の全てを含む場合はカウンターを加算する
-	// カウンターを返す
-	return 0
+	c := NewCounter(N)
+	c.Calc(0, 0b000)
+	return c.count
 }
