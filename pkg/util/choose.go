@@ -1,40 +1,59 @@
 package util
 
-func ChooseInt(a *int, b int, mode string) {
-	switch mode {
-	case "min":
-		if *a > b {
-			*a = b
+func Chmin(p interface{}, v interface{}) {
+	switch v.(type) {
+	case int:
+		a, ok := p.(*int)
+		if !ok {
+			return
 		}
-	case "max":
-		if *a < b {
-			*a = b
+		if vv := v.(int); *a > vv {
+			*a = vv
+		}
+	case float32:
+		a, ok := p.(*float32)
+		if !ok {
+			return
+		}
+		if vv := v.(float32); *a > vv {
+			*a = vv
+		}
+	case float64:
+		a, ok := p.(*float64)
+		if !ok {
+			return
+		}
+		if vv := v.(float64); *a > vv {
+			*a = vv
 		}
 	}
 }
 
-func ChooseFloat32(a *float32, b float32, mode string) {
-	switch mode {
-	case "min":
-		if *a > b {
-			*a = b
+func Chmax(p interface{}, v interface{}) {
+	switch v.(type) {
+	case int:
+		a, ok := p.(*int)
+		if !ok {
+			return
 		}
-	case "max":
-		if *a < b {
-			*a = b
+		if vv := v.(int); *a < vv {
+			*a = vv
 		}
-	}
-}
-
-func ChooseFloat64(a *float64, b float64, mode string) {
-	switch mode {
-	case "min":
-		if *a > b {
-			*a = b
+	case float32:
+		a, ok := p.(*float32)
+		if !ok {
+			return
 		}
-	case "max":
-		if *a < b {
-			*a = b
+		if vv := v.(float32); *a < vv {
+			*a = vv
+		}
+	case float64:
+		a, ok := p.(*float64)
+		if !ok {
+			return
+		}
+		if vv := v.(float64); *a < vv {
+			*a = vv
 		}
 	}
 }

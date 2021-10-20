@@ -14,11 +14,11 @@ func Solution(N int, h []int) int {
 
 	dp[0] = 0
 	for idx := 1; idx < N; idx++ {
-		util.ChooseInt(&dp[idx], dp[idx-1]+util.AbsInt(h[idx]-h[idx-1]), "min")
+		util.Chmin(&dp[idx], dp[idx-1]+util.AbsInt(h[idx]-h[idx-1]))
 		if idx < 2 {
 			continue
 		}
-		util.ChooseInt(&dp[idx], dp[idx-2]+util.AbsInt(h[idx]-h[idx-2]), "min")
+		util.Chmin(&dp[idx], dp[idx-2]+util.AbsInt(h[idx]-h[idx-2]))
 	}
 	return dp[N-1]
 }
