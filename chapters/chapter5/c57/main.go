@@ -11,6 +11,16 @@ func Solution(N, W int, weight, value []int) int {
 	dp := util.MakeTable(N+1, W+1, 0)
 	// choose nothing
 	dp[0][0] = 0
+	for item := 0; item < N; item++ {
+		for limit := 0; limit <= W; limit++ {
+			// when choose the item
+			if nw := limit - weight[item]; nw >= 0 {
+				util.Chmax(&dp[item+1][limit], dp[item][nw]+value[item])
+			}
+			// when not choose the item
+			util.Chmax(&dp[item+1][limit], dp[item][limit])
+		}
+	}
 
-	return 0
+	return dp[N][W]
 }
